@@ -1,6 +1,6 @@
 # Lights Application
 
-Lights application for OakOS v5.0.X
+Audio application for OakOS v5.0.X
 
 ## Running locally
 
