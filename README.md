@@ -1,4 +1,4 @@
-# Lights Application
+# Audio Application
 
 Audio application for OakOS v5.0.X
 
