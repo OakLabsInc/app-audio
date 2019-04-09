@@ -1,0 +1,16 @@
+---
+version: '3'
+services:
+  server:
+    build: .
+    image: index.docker.io/oaklabs/app-audio:latest
+    network_mode: host
+    devices:
+      - /dev/dri
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/shm:/dev/shm
+      - ./src:/app/src
+    environment:
+      - NODE_ENV=development
+

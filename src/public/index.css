@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+p {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+style {
+  display: none;
+}
+script {
+  display: none;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  font-size: 1.35rem;
+}
+body {
+  background-color: #000;
+  color: #fff;
+}
