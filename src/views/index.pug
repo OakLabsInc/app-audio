@@ -3,9 +3,11 @@ html
   head
     title Record Audio Test 2
     link(href='/index.css', rel='stylesheet', type='text/css')
+    link(href='/angular-material.min.css', rel='stylesheet', type='text/css')
   body
-    h1 Audio Recording Test
-    p Talk for 3 seconds, then you will hear your recording played back
+    md-content(layout-padding='')
+      h1 Audio Recording Test
+      p Talk for 3 seconds, then you will hear your recording played back
+      button(id="action" onclick="handleAction()") Start recording...
     script(src="microphone-stream.js")
     script(src="index.js")
-    button(id="action" onclick="handleAction()") Start recording...
