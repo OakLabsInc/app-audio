@@ -4,13 +4,12 @@ html(ng-app="audioApp")
     link(href='/css/index.css', rel='stylesheet', type='text/css')
     link(href='css/vendor/angular-material.min.css', rel='stylesheet', type='text/css')
   body(ng-controller="appController")
-    md-content
+    div
       md-card(layout="column" layout-align="center center" layout-padding='')
         md-card-content(flex layout="column" layout-align="center center")
           h1 Alsa Source
-        md-card-footer(layout="row" layout-align="center center")
-          md-input-container(class="md-block" layout="row" layout-align="center center" layout-fill flex)
-            button(ng-click="setAlsaCard('Headset')") Use Headset
+        md-card-footer(layout="row" layout-align="center center" layout-margin)
+            button(ng-repeat="mixer in mixers" ng-click="setAlsaCard(mixer)") Use {{mixer}}
       md-card(layout="column" layout-align="center center" layout-padding='')
         md-card-content(flex layout="column" layout-align="center center")
           h1 Audio Recording Test

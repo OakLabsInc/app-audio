@@ -38,6 +38,18 @@ app.get('/setAlsaCard/:card', function (req, res) {
   res.send('sent')
 })
 
+app.get('/getAudioInfo', function (req, response) {
+    platform.getAudioInfo( function(err, res) {
+      if(err) throw err
+      let idArray = []
+      for(var mixer in res.mixers){
+        idArray.push(res.mixers[mixer].mixer_id.split(":")[0])
+      }
+      console.log("idArray: ",[ ...new Set(idArray) ])
+      response.send([ ...new Set(idArray) ])
+    })
+})
+
 async function loadWindow () {
   console.log({
     message: `Started on port ${port}`

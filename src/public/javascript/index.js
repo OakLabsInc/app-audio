@@ -67,7 +67,7 @@ var app = window.angular
     $sceDelegateProvider.resourceUrlWhitelist(['self'])
   })
 app.controller('appController', function AppController ($http, $log, $scope, $rootScope, $timeout, $sce, $httpParamSerializerJQLike, $filter, _, oak) {
-
+  $scope.mixers = []
   $scope.setAlsaCard = function (card) {
     var url = "/setAlsaCard/" + card
     $http({
@@ -81,6 +81,16 @@ app.controller('appController', function AppController ($http, $log, $scope, $ro
   }
   $scope.initApp = function () {
     // init app here
+    $http({
+        method: 'GET',
+        url: "/getAudioInfo"
+      }).then(function (success) {
+          $log.info("Success: ", success)
+          $scope.mixers = success.data
+        }, function(error) {
+          $log.info("Error: ", error)
+        });
+    
     oak.ready()
   }
 
