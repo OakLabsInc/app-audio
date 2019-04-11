@@ -8,3 +8,5 @@ RUN npm i --progress=false --loglevel="error" \
     && npm cache clean --force
 
 CMD ["/app/src/server.js"]
+
+ENV PLATFORM_HOST=localhost:443

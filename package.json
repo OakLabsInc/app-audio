@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node_modules/.bin/oak .",
-    "dev": "LIGHTS_HOST=192.168.0.66:9100 NODE_ENV=development npm start",
+    "dev": "env $(cat .env | grep -v '#' | xargs) npm start",
     "rebuild": "rm -rf node_modules/ package-lock.json && npm i && node_modules/.bin/oak-rebuild $(pwd)",
     "test": "exit 0;"
   },
@@ -26,10 +26,16 @@
     "oak": "~5.0.4"
   },
   "dependencies": {
+    "@oaklabs/platform": "~3.0.0",
+    "angular": "~1.7.2",
+    "angular-animate": "~1.7.2",
+    "angular-aria": "~1.7.5",
+    "angular-messages": "~1.7.5",
     "express": "~4.16.3",
-    "microphone-stream": "~5.0.1",
+    "lodash": "^4.17.11",
     "pug": "~2.0.3",
-    "stylus": "~0.54.5"
+    "stylus": "~0.54.5",
+    "yamljs": "^0.3.0"
   },
   "private": true
 }

@@ -5,9 +5,9 @@ window.reload = function () {
   window.oak.reload()
 }
 
-window.load = function () {
-  window.oak.ready()
-}
+// window.load = function () {
+//   window.oak.ready()
+// }
  
 const recordAudio = () =>
   new Promise(async resolve => {
@@ -50,3 +50,42 @@ const handleAction = async () => {
   await sleep(3000);
   actionButton.disabled = false;
 }
+
+window.oak.disableZoom()
+
+window.reload = function () {
+  window.oak.reload()
+}
+
+var app = window.angular
+  .module('audioApp', ['ngMaterial'])
+  .constant('os', window.os)
+  .constant('oak', window.oak)
+  .constant('_', window._)
+
+  .config(function ($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist(['self'])
+  })
+app.controller('appController', function AppController ($http, $log, $scope, $rootScope, $timeout, $sce, $httpParamSerializerJQLike, $filter, _, oak) {
+
+  $scope.setAlsaCard = function (card) {
+    var url = "/setAlsaCard/" + card
+    $http({
+      method: 'GET',
+      url: url
+    }).then(function (success) {
+        $log.info("Success: ", success)
+      }, function(error) {
+        $log.info("Error: ", error)
+      });
+  }
+  $scope.initApp = function () {
+    // init app here
+    oak.ready()
+  }
+
+  $scope.initApp()
+
+
+})
+

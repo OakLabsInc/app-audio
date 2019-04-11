@@ -1,13 +1,29 @@
 doctype html
-html
+html(ng-app="audioApp")
   head
-    title Record Audio Test 2
-    link(href='/index.css', rel='stylesheet', type='text/css')
-    link(href='/angular-material.min.css', rel='stylesheet', type='text/css')
-  body
-    md-content(layout-padding='')
-      h1 Audio Recording Test
-      p Talk for 3 seconds, then you will hear your recording played back
-      button(id="action" onclick="handleAction()") Start recording...
-    script(src="microphone-stream.js")
-    script(src="index.js")
+    link(href='/css/index.css', rel='stylesheet', type='text/css')
+    link(href='css/vendor/angular-material.min.css', rel='stylesheet', type='text/css')
+  body(ng-controller="appController")
+    md-content
+      md-card(layout="column" layout-align="center center" layout-padding='')
+        md-card-content(flex layout="column" layout-align="center center")
+          h1 Alsa Source
+        md-card-footer(layout="row" layout-align="center center")
+          md-input-container(class="md-block" layout="row" layout-align="center center" layout-fill flex)
+            button(ng-click="setAlsaCard('Headset')") Use Headset
+      md-card(layout="column" layout-align="center center" layout-padding='')
+        md-card-content(flex layout="column" layout-align="center center")
+          h1 Audio Recording Test
+          p Talk for 3 seconds, then you will hear your recording played back
+        md-card-footer(layout="row" layout-align="center center")
+          md-input-container(class="md-block" layout="row" layout-align="center center" layout-fill flex)
+            button(id="action" onclick="handleAction()") Start recording...
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-animate.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-aria.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-messages.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-cookies.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js")
+    script(src="/javascript/vendor/angular-material.min.js")
+    script(src="/javascript/index.js")
