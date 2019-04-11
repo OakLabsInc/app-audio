@@ -68,17 +68,53 @@ var app = window.angular
   })
 app.controller('appController', function AppController ($http, $log, $scope, $rootScope, $timeout, $sce, $httpParamSerializerJQLike, $filter, _, oak) {
   $scope.mixers = []
+  $scope.installProgress = ''
+  $scope.selectedCard = null
+
   $scope.setAlsaCard = function (card) {
+    $scope.selectedCard = {
+      card: card,
+      mixers: $scope.getMixers(card)
+    }
     var url = "/setAlsaCard/" + card
     $http({
       method: 'GET',
       url: url
     }).then(function (success) {
-        $log.info("Success: ", success)
+        $log.info("setAlsaCard Success: ", success)
+        
       }, function(error) {
-        $log.info("Error: ", error)
+        $log.info("setAlsaCard Error: ", error)
       });
   }
+  $scope.setAlsaCardConfiguration = function(mixer) {
+    var json = angular.toJson( mixer.setting )
+    var url = "/setAlsaCardConfiguration/" + json
+    $http({
+      method: 'GET',
+      url: url
+    }).then(function (success) {
+        $log.info("setAlsaCardConfiguration Success: ", success)
+        
+      }, function(error) {
+        $log.info("setAlsaCardConfiguration Error: ", error)
+      });
+  }
+  $scope.getMixers = function(card) {
+    let mixers = []
+    for(i in $scope.mixers) {
+      var id = $scope.mixers[i].mixer_id
+      if(id.indexOf(card) > -1) {
+        let mixer = {
+          name: id.split(":")[1],
+          setting: $scope.mixers[i]
+        }
+        mixers.push(mixer)
+      }
+    }
+    return mixers
+  }
+  
   $scope.initApp = function () {
     // init app here
     $http({
@@ -86,13 +122,34 @@ app.controller('appController', function AppController ($http, $log, $scope, $ro
         url: "/getAudioInfo"
       }).then(function (success) {
           $log.info("Success: ", success)
+          let cardArray = []
+          for(var mixer in success.data){
+            cardArray.push(success.data[mixer].mixer_id.split(":")[0])
+          }
+          $log.info("cardArray: ",[ ...new Set(cardArray) ])
+          $scope.cards = [ ...new Set(cardArray) ]
           $scope.mixers = success.data
+
+          
         }, function(error) {
           $log.info("Error: ", error)
         });
     
     oak.ready()
   }
+
+  oak.on('installProgress', function (data){
+   
+    $log.info(data.step)
+    $timeout(function(){
+      $scope.installProgress = data.step
+    })
+    if (data.step.indexOf('SWAPPED') > -1) {
+      $timeout(function(){
+        $scope.installProgress = ''
+      },1000)
+    }
+  })
 
   $scope.initApp()
 

@@ -34,19 +34,27 @@ app.get('/', function (req, res) {
 
 app.get('/setAlsaCard/:card', function (req, res) {
   var card = req.params['card']
-  platform.reinstallApplication(card)
+  platform.reinstallApplication(card, window)
   res.send('sent')
+})
+app.get('/setAlsaCardConfiguration/:json', function (req, response) {
+  var json = JSON.parse(req.params['json'])
+  //platform.reinstallApplication(card, window)
+  console.log(JSON.stringify(json,null,2))
+
+  platform.configureAudio(json, function (err, res){
+    if(err) throw err
+    console.log("configureAudio Done")
+  })
+
+  response.send('sent')
 })
 
 app.get('/getAudioInfo', function (req, response) {
     platform.getAudioInfo( function(err, res) {
       if(err) throw err
-      let idArray = []
-      for(var mixer in res.mixers){
-        idArray.push(res.mixers[mixer].mixer_id.split(":")[0])
-      }
-      console.log("idArray: ",[ ...new Set(idArray) ])
-      response.send([ ...new Set(idArray) ])
+      
+      response.send(res.mixers)
     })
 })
 
@@ -65,10 +73,11 @@ async function loadWindow () {
   .on('ready', function () {
     platform.getAudioInfo( function(err, res) {
       if(err) throw err
-
+      
       console.log("Audio Info", res)
-
+      
     })
   })
-
+  platform.initPlatform(window)
+  
 }
