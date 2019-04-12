@@ -3,7 +3,9 @@ html(ng-app="audioApp")
   head
     link(href='/css/index.css', rel='stylesheet', type='text/css')
     link(href='css/vendor/angular-material.min.css', rel='stylesheet', type='text/css')
-  body(ng-controller="appController" ng-cloak)
+  body(ng-controller="appController" ng-click="tapped($event)" ng-mousemove="mouseMoved($event)" ng-cloak)
+    ripples
+      .ripple(ng-repeat="r in ripples", ng-style="{ top: r.y + 'px', left: r.x + 'px' }")
     div
       md-card(layout="column" layout-align="center center" layout-padding='' ng-cloak)
         md-card-content(flex layout="column" layout-align="center center")
@@ -35,9 +37,9 @@ html(ng-app="audioApp")
         md-card-footer(layout="column" layout-align="center center")
           md-input-container
             md-button.md-primary.md-raised(id="action" onclick="handleAction()") Record for 3 seconds
-          md-input-container
-            audio(controls  controlsList="nodownload")
-              source(src="/sounds/LRMonoPhase4.wav" type="audio/wav")
+          //- md-input-container
+          //-   audio(controls  controlsList="nodownload")
+          //-     source(src="/sounds/LRMonoPhase4.wav" type="audio/wav")
 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js")

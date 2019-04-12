@@ -70,7 +70,13 @@ async function loadWindow () {
     insecure: true,
     flags: ['enable-vp8-alpha-playback'],
     sslExceptions: ['localhost'],
-    background: '#000000'
+    background: '#000000',
+    scripts: [
+      {
+        name: 'uuid',
+        path: 'uuid'
+      }
+    ]
   })
     .on('ready', function () {
       platform.getAudioInfo(function (err, res) {

@@ -41,3 +41,80 @@ body .icon {
 body .icon .icon-light-up {
   color: rgba(0,0,0,0.5);
 }
+ripples {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+.ripple {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  margin-left: -0.5em;
+  border: 2px solid rgba(34,34,34,0.7);
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: rippleOut;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+}
+@-moz-keyframes rippleOut {
+  0% {
+    transform: rotate(45deg) scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) scale(2.2);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes rippleOut {
+  0% {
+    transform: rotate(45deg) scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) scale(2.2);
+    opacity: 0;
+  }
+}
+@-o-keyframes rippleOut {
+  0% {
+    transform: rotate(45deg) scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) scale(2.2);
+    opacity: 0;
+  }
+}
+@keyframes rippleOut {
+  0% {
+    transform: rotate(45deg) scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) scale(2.2);
+    opacity: 0;
+  }
+}
