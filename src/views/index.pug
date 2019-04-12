@@ -37,9 +37,9 @@ html(ng-app="audioApp")
         md-card-footer(layout="column" layout-align="center center")
           md-input-container
             md-button.md-primary.md-raised(id="action" onclick="handleAction()") Record for 3 seconds
-          //- md-input-container
-          //-   audio(controls  controlsList="nodownload")
-          //-     source(src="/sounds/LRMonoPhase4.wav" type="audio/wav")
+          md-input-container
+            audio(controls  controlsList="nodownload")
+              source(src="/sounds/LRMonoPhase4.wav" type="audio/wav")
 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js")
