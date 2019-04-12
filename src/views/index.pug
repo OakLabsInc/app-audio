@@ -3,36 +3,42 @@ html(ng-app="audioApp")
   head
     link(href='/css/index.css', rel='stylesheet', type='text/css')
     link(href='css/vendor/angular-material.min.css', rel='stylesheet', type='text/css')
-  body(ng-controller="appController")
+  body(ng-controller="appController" ng-cloak)
     div
-      md-card(layout="column" layout-align="center center" layout-padding='')
+      md-card(layout="column" layout-align="center center" layout-padding='' ng-cloak)
         md-card-content(flex layout="column" layout-align="center center")
-          h1 Alsa Source
+          h1 Audio Card Source
           p(ng-bind='installProgress')
           md-progress-linear(md-mode="indeterminate" ng-if="installProgress != ''")
         md-card-footer(layout="row" layout-align="center center" layout-margin)
-            md-button.md-primary.md-raised(ng-repeat="card in cards" ng-click="setAlsaCard(card)") Use {{card}}
-      md-card(layout="column" layout-align="center center" layout-padding='' ng-if="selectedCard")
+            md-button.md-primary.md-raised(ng-repeat="card in cards" ng-click="setAlsaCard(card)" ng-disabled="(card.toLowerCase() == selectedCard.card.toLowerCase()) || installProgress != ''") Use {{card}} 
+      md-card(layout="column" layout-align="center center" layout-padding=''  ng-cloak)
+        md-card-content(ng-if="!selectedCard.mixers.length" flex layout="column" layout-align="center center")
+          h3 Please select a card to use.
         md-card-content(flex layout="column" layout-align="center center")
           h1 {{selectedCard.card}}
         md-card-footer(layout="column" layout-align="center center")
+          
           div(layout="row" layout-align="space-between top" ng-repeat="mixer in selectedCard.mixers")
             h3(flex="40") {{mixer.name}}
             div(flex="60")
               md-slider-container
-                div {{mixer.setting.configuration.volume}}
-                md-slider(ng-model="mixer.setting.configuration.volume" min="0" max="100" ng-mouseup="setAlsaCardConfiguration(mixer)")
+                div Volume
+                md-slider(ng-model="mixer.setting.configuration.volume" md-discrete min="0" max="100" ng-change="setAlsaCardConfiguration(mixer)")
               md-slider-container
                 div {{mixer.setting.configuration.mute?'Unmute':'Mute'}}
                 md-switch(ng-model="mixer.setting.configuration.mute" aria-label="Mute" ng-change="setAlsaCardConfiguration(mixer)")
             
-      md-card(layout="column" layout-align="center center" layout-padding='')
+      md-card(layout="column" layout-align="center center" layout-padding='' ng-cloak)
         md-card-content(flex layout="column" layout-align="center center")
-          h1 Audio Recording Test
-          p Talk for 3 seconds, then you will hear your recording played back
-        md-card-footer(layout="row" layout-align="center center")
-          md-input-container(class="md-block" layout="row" layout-align="center center" layout-fill flex)
-            md-button.md-primary.md-raised(id="action" onclick="handleAction()") Start recording...
+          h1 Audio Tests
+        md-card-footer(layout="column" layout-align="center center")
+          md-input-container
+            md-button.md-primary.md-raised(id="action" onclick="handleAction()") Record for 3 seconds
+          md-input-container
+            audio(controls  controlsList="nodownload")
+              source(src="/sounds/LRMonoPhase4.wav" type="audio/wav")
+
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-animate.min.js")

@@ -1,7 +1,7 @@
 
 const oak = require('oak')
 const { join } = require('path')
-
+const _ = require('lodash')
 oak.catchErrors()
 
 const express = require('express')
@@ -20,7 +20,7 @@ app.set('views', viewsPath)
 app.set('view engine', 'pug')
 app.use(stylus.middleware({
   src: viewsPath,
-  dest: join(publicPath, "css")
+  dest: join(publicPath, 'css')
 }))
 app.use(express.static(publicPath))
 
@@ -37,25 +37,27 @@ app.get('/setAlsaCard/:card', function (req, res) {
   platform.reinstallApplication(card, window)
   res.send('sent')
 })
+
 app.get('/setAlsaCardConfiguration/:json', function (req, response) {
   var json = JSON.parse(req.params['json'])
-  //platform.reinstallApplication(card, window)
-  console.log(JSON.stringify(json,null,2))
-
-  platform.configureAudio(json, function (err, res){
-    if(err) throw err
-    console.log("configureAudio Done")
+  console.log(JSON.stringify(json, null, 2))
+  platform.configureAudio(json, function (err, res) {
+    if (err) throw err
+    console.log('configureAudio Done')
   })
-
   response.send('sent')
 })
 
 app.get('/getAudioInfo', function (req, response) {
-    platform.getAudioInfo( function(err, res) {
-      if(err) throw err
-      
-      response.send(res.mixers)
-    })
+  platform.getAudioInfo(function (err, res) {
+    if (err) throw err
+    response.send(res.mixers)
+  })
+})
+
+app.get('/getAlsaCardFromEnvironment', function (req, response) {
+  var card = process.env.ALSA_CARD || 'No Card Selected'
+  response.send(card)
 })
 
 async function loadWindow () {
@@ -70,14 +72,11 @@ async function loadWindow () {
     sslExceptions: ['localhost'],
     background: '#000000'
   })
-  .on('ready', function () {
-    platform.getAudioInfo( function(err, res) {
-      if(err) throw err
-      
-      console.log("Audio Info", res)
-      
+    .on('ready', function () {
+      platform.getAudioInfo(function (err, res) {
+        if (err) throw err
+        console.log('Audio Info', res)
+      })
     })
-  })
   platform.initPlatform(window)
-  
 }
