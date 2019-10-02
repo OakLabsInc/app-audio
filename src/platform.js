@@ -55,7 +55,7 @@ async function reinstallApplication (card) {
         image: await getLiveImageName(),
         environment: {
           ALSA_CARD: card,
-          NODE_ENV: 'production'
+          NODE_ENV: process.env.NODE_ENV || 'production'
         }
       }
     ]

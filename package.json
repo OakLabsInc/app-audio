@@ -1,7 +1,7 @@
 {
-  "name": "lights-application",
+  "name": "audio-application",
   "version": "0.0.1",
-  "description": "Oak Lights app for OakOS v5.0.x",
+  "description": "Oak Audio app for OakOS v5.0.x",
   "main": "src/server.js",
   "scripts": {
     "start": "node_modules/.bin/oak .",
@@ -14,16 +14,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OakLabsInc/app-lights.git"
+    "url": "git+https://github.com/OakLabsInc/app-audio.git"
   },
   "author": "Richard Joffray <richard@joffray.com>",
   "license": "Apache 2",
   "bugs": {
-    "url": "https://github.com/OakLabsInc/app-lights/issues"
+    "url": "https://github.com/OakLabsInc/app-audio/issues"
   },
-  "homepage": "https://github.com/OakLabsInc/app-lights#readme",
+  "homepage": "https://github.com/OakLabsInc/app-audio#readme",
   "devDependencies": {
-    "oak": "~5.0.4"
+    "oak": "~5.0.9"
   },
   "dependencies": {
     "@oaklabs/platform": "~3.0.0",
