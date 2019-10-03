@@ -30,3 +30,50 @@ docker-compose up --build
 ``` bash
 docker-compose down
 ```
+
+### OakOS API Install
+
+If you use the Audio/Info of the API to see what the `mixer_id` of the card is:
+`https://{{dashboardHost}}/api/{{dashboardVersion}}/machine/{{dashboardMachine}}/Audio/Info`
+
+In my case it returns
+
+``` json
+{
+    "code": "",
+    "details": "",
+    "body": {
+        "mixers": [
+            {
+                "mixer_id": "Headset:Headphone",
+                "configuration": {
+                    "mute": false,
+                    "volume": 48
+                }
+            },
+            {
+                "mixer_id": "Headset:Mic",
+                "configuration": {
+                    "mute": true,
+                    "volume": 0
+                }
+            }
+        ]
+    }
+}
+```
+
+So `Headset` is the environmental variable to use in this install:
+
+```{
+    "services": [
+        {
+            "image": "index.docker.io/oaklabs/app-audio:release-1.0.7",
+            "environment": {
+                "NODE_ENV": "production",
+                "ALSA_CARD": "Headset"
+            }
+        }
+    ]
+}
+```
