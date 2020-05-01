@@ -68,10 +68,10 @@ So `Headset` is the environmental variable to use in this install:
 ```{
     "services": [
         {
-            "image": "index.docker.io/oaklabs/app-audio:release-1.0.7",
+            "image": "index.docker.io/oaklabs/app-audio:capture-dell",
             "environment": {
                 "NODE_ENV": "production",
-                "ALSA_CARD": "Headset"
+                "ALSA_CARD": "PCH"
             }
         }
     ]
