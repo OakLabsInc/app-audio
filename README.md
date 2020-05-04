@@ -5,7 +5,7 @@ Audio application for OakOS v5.0.X
 ## Running locally
 
 Make sure that you are running the right version of Node locally. You will find the required version in the `.nvmrc` file
-If you are not running the same version (`node -v`) then you will need to run 
+If you are not running the same version (`node -v`) then you will need to run
 
 ``` bash
 nvm install $(cat .nvmrc)
