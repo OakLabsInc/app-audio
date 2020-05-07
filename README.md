@@ -2,6 +2,10 @@
 
 Audio application for OakOS v5.0.X
 
+```
+ Sample. Not to be used for production deployments.
+```
+ 
 ## Running locally
 
 Make sure that you are running the right version of Node locally. You will find the required version in the `.nvmrc` file
@@ -107,7 +111,8 @@ In my case it returns
 
 So `PCH` is the environmental variable to use in this install:
 
-```{
+```
+{
     "services": [
         {
             "image": "index.docker.io/oaklabs/app-audio:capture-dell",
