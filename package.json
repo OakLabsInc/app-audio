@@ -32,7 +32,7 @@
     "angular-aria": "~1.7.5",
     "angular-messages": "~1.7.5",
     "express": "~4.16.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "pug": "~2.0.3",
     "stylus": "~0.54.5",
     "uuid": "^3.3.2",
