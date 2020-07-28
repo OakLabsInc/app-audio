@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/OakLabsInc/app-audio#readme",
   "devDependencies": {
-    "oak": "~5.0.9"
+    "oak": "~5.0.10"
   },
   "dependencies": {
     "@oaklabs/platform": "~3.0.0",
