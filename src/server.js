@@ -78,7 +78,7 @@ async function loadWindow () {
       },
       {
         name: 'lodash',
-        path: 'lodash'
+        path: join(__dirname, '..', 'node_modules', 'lodash')
       },
       join(__dirname, '..', 'node_modules', 'jquery'),
       join(__dirname, '..', 'node_modules', 'angular'),
